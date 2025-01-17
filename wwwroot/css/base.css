@@ -41,7 +41,7 @@ th {
 }
 
 .td-content {
-    max-height: 9.375rem;
+    max-height: 3rem;
     overflow-y: auto;
 }
 
@@ -56,7 +56,6 @@ th {
 
 
 select {
-    margin: 1.625rem auto;
     border-radius: 4px;
     cursor: pointer;
 }

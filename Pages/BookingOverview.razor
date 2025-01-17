@@ -19,18 +19,35 @@
         {
             <tr>
                 <td>
-                    <input type="checkbox" @onchange="async (e) => await ToggleNewBooking(e)" />
+                    <div class="td-content">
+                        <input type="checkbox" @onchange="async (e) => await ToggleNewBooking(e)" />
+                    </div>
                 </td>
-                <select @bind="booking.Type">
-                    <option value="" selected disabled>-</option>
-                    @foreach (var type in Enum.GetValues(typeof(BookingType)).Cast<BookingType>())
-                    {
-                        <option value="@type">@type</option>
-                    }
-                </select>
-                <td>@booking.StartDate.ToString("d")</td>
-                <td>@booking.EndDate.ToString("d")</td>
-                <td>@booking.Price</td>
+                <td>
+                    <div class="td-content">
+                        <select @bind="booking.Type">
+                            @foreach (var type in Enum.GetValues(typeof(BookingType)).Cast<BookingType>())
+                            {
+                                <option value="@type">@type.GetDisplayName()</option>
+                            }
+                        </select>
+                    </div>
+                </td>
+                <td>
+                    <div class="td-content">
+                        @booking.StartDate.ToString("d")
+                    </div>
+                </td>
+                <td>
+                    <div class="td-content">
+                        @booking.EndDate.ToString("d")
+                    </div>
+                </td>
+                <td>
+                    <div class="td-content">
+                        @booking.Price.ToString("F2")
+                    </div>
+                </td>
             </tr>
         }
     </tbody>
