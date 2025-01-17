@@ -20,7 +20,7 @@
             <tr>
                 <td>
                     <div class="td-content">
-                        <input type="checkbox" @onchange="async (e) => await ToggleNewBooking(e)" />
+                        <input type="checkbox" @onchange="ToggleNewBooking" />
                     </div>
                 </td>
                 <td>
@@ -35,12 +35,14 @@
                 </td>
                 <td>
                     <div class="td-content">
-                            <InputDate @bind-Value="booking.StartDate" />
+                        <InputDate @bind-Value="booking.StartDate"
+                                   class="@(booking.IsDateValid ? "" : "invalid-date")" />
                     </div>
                 </td>
                 <td>
                     <div class="td-content">
-                            <InputDate @bind-Value="booking.EndDate" />
+                        <InputDate @bind-Value="booking.EndDate"
+                                   class="@(booking.IsDateValid ? "" : "invalid-date")" />
                     </div>
                 </td>
                 <td>
@@ -53,48 +55,57 @@
     </tbody>
 </table>
 
+<button @onclick="DisplayInvoice" class="btn btn-primary" style="display: block; margin: 0 auto;">Rechnung anzeigen</button>
 
 @code {
 
-    private List<Booking> _bookings =
-    [
+    private List<Booking> _bookings = new()
+    {
         new Booking
         {
             Type = BookingType.HalfBoard,
             StartDate = DateTime.Now,
             EndDate = DateTime.Now.AddDays(1),
-            Price = 0
+            Price = 0,
+            IsDateValid = true
         }
-    ];
+    };
 
-    private async Task ToggleNewBooking(ChangeEventArgs e)
+    private void ToggleNewBooking(ChangeEventArgs e)
     {
         if (e.Value as bool? == true)
         {
-            await CreateNewBookingAsync();
+            CreateNewBooking();
         }
         else
         {
-            await RemoveBookingAsync();
+            RemoveBooking();
         }
     }
 
-    private async Task CreateNewBookingAsync()
+    private void CreateNewBooking()
     {
         var newBooking = new Booking
             {
                 Type = BookingType.HalfBoard,
                 StartDate = DateTime.Now,
                 EndDate = DateTime.Now.AddDays(1),
-                Price = 0
+                Price = 0,
+                IsDateValid = true
             };
 
         _bookings.Add(newBooking);
     }
 
-    private async Task RemoveBookingAsync()
+    private void RemoveBooking()
     {
-        _bookings.Remove(_bookings[^1]);
+        if (_bookings.Any())
+        {
+            _bookings.RemoveAt(_bookings.Count - 1);
+        }
+    }
+
+    private void DisplayInvoice(MouseEventArgs e)
+    {
     }
 }
-

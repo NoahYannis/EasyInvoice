@@ -7,18 +7,43 @@ public class Booking
     [Required]
     public BookingType Type { get; set; }
 
+    private DateTime _startDate;
     [Required]
     [DataType(DataType.Date)]
-    public DateTime StartDate { get; set; }
+    public DateTime StartDate
+    {
+        get => _startDate;
+        set
+        {
+            _startDate = value;
+            ValidateDate();
+        }
+    }
 
+    private DateTime _endDate;
     [Required]
     [DataType(DataType.Date)]
     [DateGreaterThan("StartDate", ErrorMessage = "Das Enddatum muss mindestens 24h nach dem Startdatum liegen.")]
-    public DateTime EndDate { get; set; }
+    public DateTime EndDate
+    {
+        get => _endDate;
+        set
+        {
+            _endDate = value;
+            ValidateDate();
+        }
+    }
 
     [Required]
     [Range(0, double.MaxValue, ErrorMessage = "Der Preis muss eine positive Ganzzahl sein.")]
     public decimal Price { get; set; }
+
+    public bool IsDateValid { get; set; }
+
+    private void ValidateDate()
+    {
+        IsDateValid = StartDate.AddDays(1) <= EndDate && StartDate >= DateTime.Now;
+    }
 }
 
 

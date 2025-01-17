@@ -17,6 +17,13 @@ h3 {
 
 input {
     padding-inline: 5px;
+    cursor: pointer;
+}
+
+.invalid-date {
+    background-color: #ffe6e6;
+    border: 1px solid red;
+    color: red;
 }
 
 
