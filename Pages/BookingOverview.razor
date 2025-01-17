@@ -1,0 +1,83 @@
+﻿@page "/booking-overview"
+@using EasyInvoice.Models
+@inject IJSRuntime JSRuntime
+
+<h3>Buchungsabrechnung</h3>
+
+<table class="table-style">
+    <thead class="thead-dark">
+        <tr>
+            <th></th>
+            <th>Art</th>
+            <th>Von</th>
+            <th>Bis</th>
+            <th>Preis (€)</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var booking in _bookings)
+        {
+            <tr>
+                <td>
+                    <input type="checkbox" @onchange="async (e) => await ToggleNewBooking(e)" />
+                </td>
+                <select @bind="booking.Type">
+                    <option value="" selected disabled>-</option>
+                    @foreach (var type in Enum.GetValues(typeof(BookingType)).Cast<BookingType>())
+                    {
+                        <option value="@type">@type</option>
+                    }
+                </select>
+                <td>@booking.StartDate.ToString("d")</td>
+                <td>@booking.EndDate.ToString("d")</td>
+                <td>@booking.Price</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+
+@code {
+
+    private List<Booking> _bookings =
+    [
+        new Booking
+        {
+            Type = BookingType.HalfBoard,
+            StartDate = DateTime.Now,
+            EndDate = DateTime.Now.AddDays(1),
+            Price = 0
+        }
+    ];
+
+    private async Task ToggleNewBooking(ChangeEventArgs e)
+    {
+        if (e.Value as bool? == true)
+        {
+            await CreateNewBookingAsync();
+        }
+        else
+        {
+            await RemoveBookingAsync();
+        }
+    }
+
+    private async Task CreateNewBookingAsync()
+    {
+        var newBooking = new Booking
+            {
+                Type = BookingType.HalfBoard,
+                StartDate = DateTime.Now,
+                EndDate = DateTime.Now.AddDays(1),
+                Price = 0
+            };
+
+        _bookings.Add(newBooking);
+    }
+
+    private async Task RemoveBookingAsync()
+    {
+        _bookings.Remove(_bookings[^1]);
+    }
+}
+

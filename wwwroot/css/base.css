@@ -1,0 +1,62 @@
+﻿:root {
+    --primary-color: #f8d294;
+    --primary-color-hover: #e7b57e;
+}
+
+
+.table-style {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1.25rem auto;
+    font-size: clamp(0.9rem, 2.5vw, 1.2rem);
+    text-align: center;
+    border: 3px solid #000;
+}
+
+    .table-style thead tr {
+        background-color: var(--primary-color);
+        color: black;
+        font-weight: bold;
+    }
+
+th {
+    cursor: pointer;
+    user-select: none;
+}
+
+    th:hover {
+        background-color: var(--primary-color-hover);
+    }
+
+.table-style th,
+.table-style td {
+    padding: 0.75rem 0.9375rem;
+    border: 0.0625rem solid #000;
+    text-align: center;
+    max-width: 15.625rem;
+    max-height: 6.25rem;
+    overflow: auto;
+    white-space: normal;
+    word-wrap: break-word;
+}
+
+.td-content {
+    max-height: 9.375rem;
+    overflow-y: auto;
+}
+
+.table-style tbody tr {
+    border-bottom: 1px solid black;
+    background-color: white;
+}
+
+    .table-style tbody tr:hover {
+        background-color: #f1f1f1;
+    }
+
+
+select {
+    margin: 1.625rem auto;
+    border-radius: 4px;
+    cursor: pointer;
+}
