@@ -42,7 +42,7 @@ public class Booking
 
     private void ValidateDate()
     {
-        IsDateValid = StartDate.AddDays(1) <= EndDate && StartDate >= DateTime.Now;
+        IsDateValid = StartDate < EndDate && StartDate >= DateTime.Now;
     }
 }
 
