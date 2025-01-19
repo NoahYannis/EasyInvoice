@@ -1,6 +1,6 @@
-# EasyInvoiceBlazor
+# EasyInvoice
 
-**EasyInvoiceBlazor** ist eine moderne Webanwendung, die es ermöglicht, Buchungen zu verwalten und daraus Rechnungen zu erstellen. Die Anwendung wurde mit [Blazor](https://dotnet.microsoft.com/apps/aspnet/web-apps/blazor) und .NET 9 entwickelt und bietet eine intuitive Benutzeroberfläche sowie nahtlose Cloud-Integration.
+**EasyInvoice** ist eine moderne Webanwendung, die es ermöglicht, Buchungen zu verwalten und daraus Rechnungen zu erstellen. Die Anwendung wurde mit [Blazor](https://dotnet.microsoft.com/apps/aspnet/web-apps/blazor) und .NET 9 entwickelt und bietet eine intuitive Benutzeroberfläche sowie nahtlose Cloud-Integration.
 
 ## Features
 
@@ -20,7 +20,7 @@
 
 - **Technologien:**
   - Entwickelt mit Blazor WebAssembly und .NET 9.
-  - Gehostet auf Azure.
+  - Gehostet auf Azure (https://white-sky-0e377e603-preview.westeurope.4.azurestaticapps.net/).
   - Docker-Unterstützung.
 
 ## Voraussetzungen
@@ -38,18 +38,13 @@ git clone https://github.com/NoahYannis/EasyInvoiceBlazor.git
 cd EasyInvoiceBlazor
 ```
 
-### 2. Abhängigkeiten wiederherstellen
-
-```bash
-dotnet restore
-```
 
 ### 3. Anwendung starten
 
 Führen Sie die Anwendung lokal aus:
 
 ```bash
-dotnet run --project EasyInvoiceBlazor
+dotnet run --project EasyInvoice
 ```
 
 Die Anwendung ist unter `http://localhost:7276` verfügbar.
@@ -59,8 +54,8 @@ Die Anwendung ist unter `http://localhost:7276` verfügbar.
 Erstellen und starten Sie einen Docker-Container:
 
 ```bash
-docker build -t easyinvoiceblazor .
-docker run -d -p 8080:80 easyinvoiceblazor
+docker build -t easyinvoice .
+docker run -d -p 8080:80 easyinvoice
 ```
 
 Die Anwendung ist dann unter `http://localhost:8080` verfügbar.
