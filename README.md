@@ -1,6 +1,6 @@
 # EasyInvoice
 
-**EasyInvoice** ist eine moderne Webanwendung, die es ermöglicht, Buchungen zu verwalten und daraus Rechnungen zu erstellen. Die Anwendung wurde mit [Blazor](https://dotnet.microsoft.com/apps/aspnet/web-apps/blazor) und .NET 9 entwickelt und bietet eine intuitive Benutzeroberfläche sowie nahtlose Cloud-Integration.
+**EasyInvoice** ist eine moderne Webanwendung, die es ermöglicht, Buchungen zu verwalten und daraus Rechnungen zu erstellen. Die Anwendung wurde mit [Blazor](https://dotnet.microsoft.com/apps/aspnet/web-apps/blazor) und .NET 9 im Rahmen eines Berufsschulprojekts entwickelt.
 
 ## Features
 
@@ -51,11 +51,4 @@ Die Anwendung ist unter `http://localhost:7276` verfügbar.
 
 ### 4. Docker verwenden (optional)
 
-Erstellen und starten Sie einen Docker-Container:
-
-```bash
-docker build -t easyinvoice .
-docker run -d -p 8080:80 easyinvoice
-```
-
-Die Anwendung ist dann unter `http://localhost:8080` verfügbar.
+Das Docker-Package ist hier verfügbar: https://github.com/NoahYannis/EasyInvoice/pkgs/container/easyinvoice
