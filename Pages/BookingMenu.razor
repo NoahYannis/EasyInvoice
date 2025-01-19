@@ -1,26 +1,31 @@
-﻿@page "/booking-overview"
-@using EasyInvoice.Models
+﻿@page "/booking-menu"
+
+@using EasyInvoice
+
 @inject IJSRuntime JSRuntime
+@inject NavigationManager NavManager
+@inject BookingService _bookingService
 
 <h3>Buchungsabrechnung</h3>
+<hr />
 
 <table class="table-style">
     <thead class="thead-dark">
         <tr>
             <th></th>
             <th>Art</th>
-            <th>Von</th>
-            <th>Bis</th>
+            <th>Start</th>
+            <th>Ende</th>
             <th>Preis (€)</th>
         </tr>
     </thead>
     <tbody>
-        @foreach (var booking in _bookings)
+        @foreach (var booking in _bookingService.GetBookings())
         {
             <tr>
                 <td>
                     <div class="td-content">
-                        <input type="checkbox" @onchange="ToggleNewBooking" />
+                        <input type="checkbox" @onchange="(e) => ToggleNewBooking(e, booking)" checked="@(booking.IsSelected)" />
                     </div>
                 </td>
                 <td>
@@ -47,7 +52,10 @@
                 </td>
                 <td>
                     <div class="td-content">
-                        @booking.Price.ToString("F2")
+                        <InputNumber @bind-Value="booking.Price"
+                                     step="0.01"
+                                     min="0.00"
+                                     class="text-center" />
                     </div>
                 </td>
             </tr>
@@ -55,57 +63,57 @@
     </tbody>
 </table>
 
-<button @onclick="DisplayInvoice" class="btn btn-primary" style="display: block; margin: 0 auto;">Rechnung anzeigen</button>
+<div class="d-flex justify-content-center align-items-center gap-2">
+    <button @onclick="DisplayInvoice" class="btn btn-primary">Rechnung anzeigen</button>
+    <button @onclick="ToggleClearState" class="btn btn-danger">
+        @(_bookingService.IsCleared ? "Zurück" : "Clear")
+    </button>
+</div>
 
 @code {
 
-    private List<Booking> _bookings = new()
-    {
-        new Booking
-        {
-            Type = BookingType.HalfBoard,
-            StartDate = DateTime.Now.AddDays(1),
-            EndDate = DateTime.Now.AddDays(2),
-            Price = 0,
-            IsDateValid = true
-        }
-    };
 
-    private void ToggleNewBooking(ChangeEventArgs e)
+    private void ToggleNewBooking(ChangeEventArgs e, Booking booking)
     {
-        if (e.Value as bool? == true)
+        booking.IsSelected = (bool)e.Value!;
+
+        if (booking.IsSelected)
         {
             CreateNewBooking();
         }
         else
         {
-            RemoveBooking();
+            RemoveBooking(booking);
         }
     }
 
     private void CreateNewBooking()
     {
-        var newBooking = new Booking
-            {
-                Type = BookingType.HalfBoard,
-                StartDate = DateTime.Now.AddDays(1),
-                EndDate = DateTime.Now.AddDays(2),
-                Price = 0,
-                IsDateValid = true
-            };
-
-        _bookings.Add(newBooking);
+        var newBooking = _bookingService.GetEmptyBooking();
+        _bookingService.AddBooking(newBooking);
     }
 
-    private void RemoveBooking()
+    private void RemoveBooking(Booking booking)
     {
-        if (_bookings.Any())
-        {
-            _bookings.RemoveAt(_bookings.Count - 1);
-        }
+        _bookingService.RemoveBooking(booking);
+    }
+
+    private void ToggleClearState()
+    {
+        _bookingService.IsCleared = !_bookingService.IsCleared;
     }
 
     private void DisplayInvoice(MouseEventArgs e)
     {
+        bool bookingsValid = _bookingService.GetBookings().TrueForAll(b => b.IsDateValid);
+
+        if (bookingsValid)
+        {
+            NavManager.NavigateTo("/invoice-display");
+        }
+        else
+        {
+            JSRuntime.InvokeVoidAsync("alert", "Bitte überprüfen Sie die Buchungsdaten.");
+        }
     }
 }

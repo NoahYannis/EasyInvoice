@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace EasyInvoice.Models;
+namespace EasyInvoice;
 
 public class Booking
 {
@@ -15,7 +15,7 @@ public class Booking
         get => _startDate;
         set
         {
-            _startDate = value;
+            _startDate = value.Date;
             ValidateDate();
         }
     }
@@ -29,16 +29,23 @@ public class Booking
         get => _endDate;
         set
         {
-            _endDate = value;
+            _endDate = value.Date;
             ValidateDate();
         }
     }
 
+    private decimal _price;
     [Required]
     [Range(0, double.MaxValue, ErrorMessage = "Der Preis muss eine positive Ganzzahl sein.")]
-    public decimal Price { get; set; }
+    public decimal Price
+    {
+        get => _price;
+        set => _price = value >= 0.00m ? Math.Round(value, 2) : _price;
+    }
 
-    public bool IsDateValid { get; set; }
+    public bool IsDateValid { get; set; } = true;
+
+    public bool IsSelected { get; set; } = false;
 
     private void ValidateDate()
     {

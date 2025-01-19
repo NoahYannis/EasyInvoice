@@ -1,0 +1,54 @@
+﻿@page "/invoice-display"
+
+@inject BookingService _bookingService
+
+<h3>Rechnung</h3>
+
+<hr />
+
+<table class="table-style">
+    <thead>
+        <tr>
+            <th></th>
+            <th>Art</th>
+            <th>Zeitraum</th>
+            <th>Betrag (€) </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var booking in _bookingService.GetBookings())
+        {
+            <tr>
+                <td>
+                    <div class="td-content">
+                        @(_bookingService.GetBookings().IndexOf(booking) + 1)
+                    </div>
+                </td>
+                <td>
+                    <div class="td-content">
+                        @booking.Type.GetDisplayName()
+                    </div>
+                </td>
+                <td>
+                    <div class="td-content">
+                        @booking.StartDate.ToShortDateString() - @booking.EndDate.ToShortDateString()
+                    </div>
+                </td>
+                <td>
+                    <div class="td-content">
+                        @booking.Price.ToString("0.00")
+                    </div>
+                </td>
+            </tr>
+        }
+        <tr>
+            <td colspan="3" style="text-align: right; font-weight: bold;">Gesamtbetrag (Euro):</td>
+            <td style="font-weight: bold;">@_bookingService.GetBookings().Sum(b => b.Price).ToString("0.00")</td>
+        </tr>
+    </tbody>
+</table>
+
+@code {
+
+
+}
