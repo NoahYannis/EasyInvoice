@@ -1,0 +1,14 @@
+{
+  "$schema": "https://aka.ms/azure/static-web-apps-cli/schema",
+  "configurations": {
+    "easy-invoice": {
+      "appLocation": ".",
+      "outputLocation": "bin\\wwwroot",
+      "appBuildCommand": "dotnet publish -c Release -o bin",
+      "run": "dotnet watch run",
+      "appDevserverUrl": "http://localhost:7267",
+      "appName": "EasyInvoice",
+      "resourceGroup": "easy-invoice-rg"
+    }
+  }
+}
