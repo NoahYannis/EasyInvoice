@@ -19,7 +19,7 @@
 
 
 - **Technologien:**
-  - Entwickelt mit Blazor und .NET 9.
+  - Entwickelt mit Blazor WebAssembly und .NET 9.
   - Gehostet auf Azure.
   - Docker-Unterstützung.
 
@@ -52,7 +52,7 @@ Führen Sie die Anwendung lokal aus:
 dotnet run --project EasyInvoiceBlazor
 ```
 
-Die Anwendung ist unter `http://localhost:7241` verfügbar.
+Die Anwendung ist unter `http://localhost:7276` verfügbar.
 
 ### 4. Docker verwenden (optional)
 
