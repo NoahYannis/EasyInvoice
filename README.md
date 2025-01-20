@@ -34,8 +34,8 @@ Um das Projekt lokal auszuführen, benötigen Sie entweder:
 
 ### 1. Repository klonen
 ```bash
-git clone https://github.com/NoahYannis/EasyInvoiceBlazor.git
-cd EasyInvoiceBlazor
+git clone https://github.com/NoahYannis/EasyInvoice.git
+cd EasyInvoice
 ```
 
 
