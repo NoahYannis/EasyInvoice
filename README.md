@@ -2,20 +2,19 @@
 
 **EasyInvoice** ist eine moderne Webanwendung, die es ermöglicht, Buchungen zu verwalten und daraus Rechnungen zu erstellen. Die Anwendung wurde mit [Blazor](https://dotnet.microsoft.com/apps/aspnet/web-apps/blazor) und .NET 9 im Rahmen eines Berufsschulprojekts entwickelt.
 
+![image](https://github.com/user-attachments/assets/66530b52-ede9-4231-add1-5e0be0624e2f)
+![image](https://github.com/user-attachments/assets/d83bb867-b398-4f4f-82b5-652c31d42606)
+
+
 ## Features
 
 - **Buchungsmanagement:**
   - Buchungen erstellen, bearbeiten und löschen.
   - Übersichtliche Darstellung aller Buchungen.
  
-![image](https://github.com/user-attachments/assets/211037b8-f413-4562-bf03-eb6c684da4f7)
-![image](https://github.com/user-attachments/assets/f48fa812-339e-47ea-b4d6-c93887f45ccf)
-
-
 
 - **Rechnungsübersicht:**
   - Basierend auf den Buchungen können Rechnungen generiert und angezeigt werden.
-![image](https://github.com/user-attachments/assets/e0ee4889-5910-4147-be2d-22298e8840d4)
 
 
 - **Technologien:**
